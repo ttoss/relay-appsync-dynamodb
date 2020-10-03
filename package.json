@@ -1,0 +1,63 @@
+{
+  "name": "relay-appsync-dynamodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "lerna run test",
+    "version": "lerna version",
+    "build": "lerna run build",
+    "deploy": "lerna run deploy",
+    "list-packages": "lerna ls",
+    "list-updates": "npx ncu && lerna exec -- npx ncu",
+    "reinstall": "yarn run remove-all-node-modules && yarn",
+    "remove-all-node-modules": "npx lerna exec -- rm -rf node_modules && rm -rf node_modules && rm -f yarn.lock",
+    "update-all": "npx ncu -u && lerna exec -- npx ncu -u"
+  },
+  "keywords": [],
+  "author": {
+    "email": "arantespp@gmail.com",
+    "name": "Pedro Arantes",
+    "url": "https://twitter.com/arantespp"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "carlin": "^0.6.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.0.2",
+    "eslint-plugin-jest-dom": "^3.2.3",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.3",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "eslint-plugin-relay": "^1.8.1",
+    "husky": "^4.3.0",
+    "imagemin-lint-staged": "^0.4.0",
+    "jest": "^26.4.2",
+    "jest-emotion": "^10.0.32",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.4.0",
+    "npm-check-updates": "^9.0.3",
+    "prettier": "^2.1.2",
+    "stylelint": "^13.7.2",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-prettier": "^1.1.2",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/**/*"
+  ]
+}

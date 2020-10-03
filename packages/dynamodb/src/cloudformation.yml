@@ -1,0 +1,37 @@
+Resources:
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      BillingMode: PAY_PER_REQUEST
+      # GlobalSecondaryIndexes:
+      #   - IndexName: GSI1
+      #     KeySchema:
+      #       - AttributeName: rangeKey
+      #         KeyType: HASH
+      #       - AttributeName: hashKey
+      #         KeyType: RANGE
+      #     Projection:
+      #       ProjectionType: ALL
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      TableName: RelayAppSyncDynamoDBTable
+
+Outputs:
+  DynamoDBTableName:
+    Value: !Ref DynamoDBTable
+    Export:
+      Name: !Join [':', [!Ref 'AWS::StackName', DynamoDBTableName]]
+
+  DynamoDBTableRegion:
+    Value: !Ref AWS::Region
+    Export:
+      Name: !Join [':', [!Ref 'AWS::StackName', DynamoDBTableRegion]]
+
+  DynamoDBTableArn:
+    Value: !GetAtt DynamoDBTable.Arn
+    Export:
+      Name: !Join [':', [!Ref 'AWS::StackName', DynamoDBTableArn]]

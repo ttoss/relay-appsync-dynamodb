@@ -1,0 +1,64 @@
+Resources:
+  AppSyncGraphQLApi:
+    Type: AWS::AppSync::GraphQLApi
+    Properties:
+      AuthenticationType: API_KEY
+      Name: !Join [':', [!Ref 'AWS::StackName', AppSyncGraphQLApi]]
+
+  AppSyncApiKey:
+    Type: AWS::AppSync::ApiKey
+    Properties:
+      ApiId: !Ref AppSyncGraphQLApi
+
+  AppSyncGraphQLSchema:
+    Type: AWS::AppSync::GraphQLSchema
+    Properties:
+      ApiId: !Ref AppSyncGraphQLApi
+      Definition: !SubString src/schema.graphql
+
+  AppSyncGraphQLApiIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: appsync.amazonaws.com
+              Action: sts:AssumeRole
+      Policies:
+        - PolicyName: AppSyncGraphQLApiIAMRolePolicy
+          PolicyDocument:
+            Version': '2012-10-17'
+            Statement':
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Import RelayAppsyncDynamodbDynamodb-main:DynamoDBTableArn
+
+  DynamoDBAppSyncDataSource:
+    Type: AWS::AppSync::DataSource
+    Properties:
+      ApiId: !Ref AppSyncGraphQLApi
+      DynamoDBConfig:
+        AwsRegion: !Import RelayAppsyncDynamodbDynamodb-main:DynamoDBTableRegion
+        TableName: !Import RelayAppsyncDynamodbDynamodb-main:DynamoDBTableName
+      Name: DynamoDBAppSyncDataSource
+      ServiceRoleArn: !GetAtt AppSyncGraphQLApiIAMRole.Arn
+      Type: AMAZON_DYNAMODB
+
+  QueryUserAppSyncResolver:
+    Type: AWS::AppSync::Resolver
+    Properties:
+      ApiId: !Ref AppSyncGraphQLApi
+      DataSourceName: !Ref DynamoDBAppSyncDataSource
+      FieldName: user
+      RequestMappingTemplate: |
+        {
+          "version": "2017-02-28",
+          "operation": "GetItem",
+          "key": {
+            "id": $util.dynamodb.toDynamoDBJson($ctx.args.id),
+          }          
+        }
+      ResponseMappingTemplate: $util.toJson($ctx.result)
+      TypeName: Query
