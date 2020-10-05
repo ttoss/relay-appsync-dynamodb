@@ -1,0 +1,26 @@
+{
+  "name": "@relay-appsync-dynamodb/app",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "relay": "relay-compiler"
+  },
+  "dependencies": {
+    "aws-amplify": "^3.3.3",
+    "next": "9.5.3",
+    "react": "^0.0.0-experimental-94c0244ba",
+    "react-dom": "^0.0.0-experimental-94c0244ba",
+    "react-relay": "^0.0.0-experimental-183bdd28"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.50",
+    "@types/react-relay": "^7.0.12",
+    "graphql": "^15.3.0",
+    "relay-compiler": "^10.0.1",
+    "relay-compiler-language-typescript": "^13.0.1",
+    "relay-config": "^10.0.1",
+    "typescript": "^4.0.3"
+  }
+}

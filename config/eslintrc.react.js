@@ -14,6 +14,7 @@ module.exports = {
     ], // also want to use with ".tsx"
     'react/prop-types': 'off', // Is this incompatible with TS props type?
     'react/jsx-wrap-multilines': 'off', // This rule conflicts with prettier/prettier
+    'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off', // Problems with function components
     'react-hooks/rules-of-hooks': 'error',
     'relay/graphql-syntax': 'error',

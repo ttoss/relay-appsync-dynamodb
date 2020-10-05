@@ -5,16 +5,20 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: title
+          AttributeType: S
       BillingMode: PAY_PER_REQUEST
-      # GlobalSecondaryIndexes:
-      #   - IndexName: GSI1
-      #     KeySchema:
-      #       - AttributeName: rangeKey
-      #         KeyType: HASH
-      #       - AttributeName: hashKey
-      #         KeyType: RANGE
-      #     Projection:
-      #       ProjectionType: ALL
+      GlobalSecondaryIndexes:
+        - IndexName: queryUserPosts
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: title
+              KeyType: RANGE
+          Projection:
+            ProjectionType: KEYS_ONLY
       KeySchema:
         - AttributeName: id
           KeyType: HASH

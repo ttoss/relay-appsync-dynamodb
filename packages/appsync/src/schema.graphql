@@ -1,10 +1,56 @@
-type User {
+interface Node {
   id: ID!
-  name: String!
 }
+
+type User implements Node {
+  id: ID!
+  name: String
+  posts(first: Int!, after: String): PostConnection
+}
+
+type ItemsKeys {
+  id: ID!
+  title: String
+  userId: String
+}
+
+type PostConnection {
+  edges: [PostEdge]
+  pageInfo: PageInfo!
+  ctx: String
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type PostEdge {
+  cursor: String!
+  node: Post
+}
+
+type Post implements Node {
+  id: ID!
+  title: String!
+  description: String
+}
+
+# type UserFriendsConnection {
+#   pageInfo: PageInfo!
+#   edges: [UserFriendsEdge]
+# }
+
+# type UserFriendsEdge {
+#   cursor: String!
+#   node: User
+# }
 
 type Query {
   user(id: ID!): User
+  node(id: ID!): Node
 }
 
 schema {
