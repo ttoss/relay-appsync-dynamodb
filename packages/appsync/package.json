@@ -1,8 +1,0 @@
-{
-  "name": "@relay-appsync-dynamodb/appsync",
-  "version": "1.0.0",
-  "scripts": {
-    "test": "carlin deploy"
-  },
-  "license": "MIT"
-}
