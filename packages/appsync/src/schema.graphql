@@ -1,0 +1,17 @@
+interface Node {
+  id: ID!
+}
+
+type User implements Node {
+  id: ID!
+  name: String
+}
+
+type Query {
+  user(id: ID!): User
+  node(id: ID!): Node
+}
+
+schema {
+  query: Query
+}
